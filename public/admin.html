@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Admin · Rattan Furniture Kenya</title>
+<meta name="theme-color" content="#241F1B"><link rel="icon" type="image/png" href="/favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FBFAF8;--ink:#241F1B;--mut:#6E655E;--line:#E6E1DA;color-scheme:light}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:'Playfair Display',Georgia,serif;font-weight:500;margin:0 0 14px;line-height:1.15}h2{font-size:34px}h3{font-size:26px}
+header{position:sticky;top:0;z-index:10;background:rgba(251,250,248,.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);box-shadow:0 8px 26px rgba(0,0,0,.05);padding:16px 36px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px}
+.logo{display:flex;flex-direction:column;line-height:1;color:var(--ink);text-decoration:none}.logo b{font-size:25px;letter-spacing:.16em;font-weight:500}.logo i{font-style:normal;font-size:9px;letter-spacing:.42em;margin-top:5px}
+.hr{display:flex;align-items:center;gap:22px}.hr a{color:var(--ink);text-decoration:none;letter-spacing:.18em;text-transform:uppercase;font-size:12.5px;font-weight:600;border-bottom:1px solid var(--ink);padding-bottom:2px}
+.w{max-width:1200px;margin:0 auto;padding:44px 36px 80px}.fi{animation:fi .5s ease both}@keyframes fi{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.tabs{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
+button{font:600 12.5px Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;cursor:pointer;border:1px solid var(--ink);border-radius:0;padding:14px 24px;background:var(--ink);color:#fff;transition:.2s}button:hover{opacity:.85}button:disabled{opacity:.5}
+button.g{background:#fff;color:var(--ink);border-color:#D9D4CF}button.on{background:var(--ink);color:#fff}button.r{background:#fff;color:#B3261E;border-color:#D9D4CF}
+.box{background:#fff;border:1px solid var(--line);padding:30px;margin-bottom:24px}
+input,textarea{width:100%;padding:15px;border:1px solid #D9D4CF;border-radius:0;font:inherit;margin:6px 0 16px;background:#fff;color:var(--ink);outline:0}input:focus,textarea:focus{border-color:var(--ink)}
+label{font-weight:600;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}
+table{width:100%;border-collapse:collapse;margin-top:18px}td,th{padding:16px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}th{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut);font-weight:600}
+td img{width:64px;height:80px;object-fit:cover;background:#F1EEE9}
+.st{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:20px;margin-bottom:24px}.st div{background:#fff;border:1px solid var(--line);padding:22px;font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--mut)}.st b{font:500 40px 'Playfair Display',serif;display:block;color:var(--ink);letter-spacing:0;text-transform:none}
+.m{color:#B3261E;margin:0}.ok{color:#1B7A3E;font-weight:600}
+.b{padding:4px 12px;font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase}.b.paid{background:#E2F1E7;color:#1B7A3E}.b.pending{background:#F6EBCF;color:#8A5A00}.b.failed{background:#F7DEDB;color:#B3261E}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px}@media(max-width:700px){header{padding:14px 18px}.w{padding:28px 18px 60px}}
+</style></head><body>
+<header><a class="logo" href="index.html"><b>RATTAN</b><i>FURNITURE KENYA · ADMIN</i></a><div class="hr"><a href="index.html" target="_blank">View store</a><button class="g" data-a="out" id="lo" style="display:none">Sign out</button></div></header>
+<div class="w" id="app"></div>
+<script>
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const im=k=>/^(data:|img\/|\/api\/|https?:)/.test(k)?k:'img/'+k+'.webp',money=n=>'KES '+Number(n).toLocaleString('en-KE');
+let D=null,O=[],tab='p',ed=null,note='';
+const api=async(action,b={})=>{try{const r=await fetch('/api/admin',{method:'POST',headers:{'content-type':'application/json','x-admin-token':sessionStorage.rf_t||''},body:JSON.stringify({action,...b})}),j=await r.json();if(r.status===401&&action!=='login'){delete sessionStorage.rf_t;view()}return{ok:r.ok,...j}}catch(e){return{ok:false,error:'No connection to the server'}}};
+const rd=f=>new Promise(r=>{const fr=new FileReader();fr.onload=()=>{const i=new Image();i.onload=()=>{const w=Math.min(800,i.width),c=document.createElement('canvas');c.width=w;c.height=Math.round(i.height*w/i.width);c.getContext('2d').drawImage(i,0,0,c.width,c.height);r(c.toDataURL('image/jpeg',.75))};i.src=fr.result};fr.readAsDataURL(f)});
+async function init(){D=null;for(const u of['/api/data','data.json']){if(D)break;try{const r=await fetch(u,{cache:'no-cache'});if(r.ok)D=await r.json()}catch(e){}}view()}
+const saveD=async()=>{const j=await api('save',{data:D});if(j.ok)note='Saved. The change is live on the website now.';else alert(j.error||'Could not save');return j.ok};
+function prods(){const cs=[...new Set(D.p.map(x=>x.c))];
+let h=`<div class="st"><div><b>${D.p.length}</b>Products</div><div><b>${cs.length}</b>Categories</div><div><b>${D.p.filter(x=>x.f).length}</b>On home page</div></div>`;
+if(ed!==null){const p=ed<0?{n:'',c:cs[0]||'',p:'',d:'',i:'',f:0}:D.p[ed];
+h+=`<div class="box"><h3>${ed<0?'Add product':'Edit product'}</h3><label>Name</label><input id="fn" value="${esc(p.n)}"><label>Category</label><input id="fc" list="cl" value="${esc(p.c)}"><datalist id="cl">${cs.map(c=>`<option value="${esc(c)}">`).join('')}</datalist><label>Price (KES)</label><input id="fp" type="number" min="0" value="${esc(p.p)}"><label>Description</label><textarea id="fd" rows="3">${esc(p.d)}</textarea><label><input id="ff" type="checkbox" ${p.f?'checked':''} style="width:auto;margin-right:8px">Show in Best sellers on the home page</label><br><br><label>Photo</label><br>${p.i?`<img src="${esc(im(p.i))}" alt="" style="width:120px;border-radius:0"><br>`:''}<input id="fi" type="file" accept="image/*"><button data-a="savep">Save product</button> <button class="g" data-a="cancel">Cancel</button></div>`}
+return h+`<div class="box"><div style="display:flex;gap:10px;flex-wrap:wrap"><input id="q" placeholder="Search products…" style="flex:1;margin:0"><button data-a="add">+ Add product</button></div><table><tr><th></th><th>Name</th><th>Category</th><th>Price</th><th></th></tr>${D.p.map((p,i)=>`<tr data-t="${esc((p.n+' '+p.c).toLowerCase())}"><td><img src="${esc(im(p.i))}" alt=""></td><td>${esc(p.n)}${p.f?' ★':''}</td><td>${esc(p.c)}</td><td>${money(p.p)}</td><td><button class="g" data-a="edit" data-v="${i}">Edit</button> <button class="r" data-a="del" data-v="${i}">Delete</button></td></tr>`).join('')}</table></div>`}
+const sett=()=>{const s=D.s;return `<div class="box"><h3>Site settings</h3><label>WhatsApp / phone number (customers are sent here after paying)</label><input id="sp" value="${esc(s.phone)}"><label>Announcement bar text</label><input id="sa" value="${esc(s.announce)}"><label>Home page headline</label><input id="sh" value="${esc(s.h1)}"><label>Home page intro text</label><textarea id="sx" rows="3">${esc(s.hp)}</textarea><label>Instagram username (optional)</label><input id="si" value="${esc(s.ig||'')}" placeholder="e.g. rattanfurniturekenya"><p style="color:var(--mut);margin:-6px 0 18px">Shows a "Follow us" link on the site. To show the photo feed as well, add an Instagram access token in Cloudflare (see the guide).</p><button data-a="saves">Save settings</button></div>`};
+const ords=()=>`<div class="box"><button class="g" data-a="refresh">Refresh orders</button><table><tr><th>Time</th><th>Order</th><th>Customer</th><th>Items</th><th>Amount</th><th>Status</th></tr>${O.map(o=>`<tr><td>${new Date(o.created).toLocaleString('en-KE')}</td><td>${esc(o.ref)}<br><small>${esc(o.receipt||'')}</small></td><td>${esc(o.name)}<br>${esc(o.phone)}<br>${esc((o.zone?o.zone+', ':'')+o.location)}</td><td>${o.items.map(i=>esc(i.n)+' x'+i.q+'<br><small>'+esc(i.w+' weave, '+i.c+' cushions')+'</small>').join('<br>')}</td><td>${money(o.paid||o.amount)}${o.fee?`<br><small>incl. delivery ${money(o.fee)}</small>`:''}</td><td><span class="b ${esc(o.status)}">${esc(o.status)}</span></td></tr>`).join('')||'<tr><td colspan="6">No orders yet.</td></tr>'}</table></div>`;
+const dat=()=>`<div class="box"><h3>Backup</h3><p>Everything you save here is stored on the server and shows on the website straight away. You can also keep a copy of your products and settings.</p><button data-a="exp">Download data.json</button></div>`;
+let ST=[];
+const loadS=async()=>{const j=await api('stats');if(j.ok)ST=j.days||[]};
+const deliv=()=>{const s=D.s,Z=s.delivery||[];return `<div class="box"><h3>Delivery fees by location</h3><p style="color:var(--mut)">Customers choose their location in the cart and the fee is added to the M-Pesa payment. Leave the list empty to arrange delivery on WhatsApp instead. The fees below are sample figures: set your real ones.</p><table><tr><th>Location</th><th>Fee (KES)</th><th></th></tr>${Z.map((z,i)=>`<tr><td><input class="zn" value="${esc(z.n)}" style="margin:0"></td><td><input class="zf" type="number" min="0" value="${esc(z.f)}" style="margin:0"></td><td><button class="r" data-a="delz" data-v="${i}">Remove</button></td></tr>`).join('')}</table><div style="margin-top:18px"><button class="g" data-a="addz">+ Add location</button></div><label style="display:block;margin-top:26px">Free delivery for orders of (KES, 0 = never)</label><input id="zfree" type="number" min="0" value="${esc(s.free||0)}"><button data-a="savez">Save delivery fees</button></div>`};
+const readZ=k=>{const n=[...document.querySelectorAll('.zn')],f=[...document.querySelectorAll('.zf')];let z=n.map((x,i)=>({n:x.value.trim(),f:Math.max(0,Math.round(+f[i].value||0))}));if(!k)z=z.filter(x=>x.n);D.s.delivery=z;const fr=$('#zfree');if(fr)D.s.free=Math.max(0,Math.round(+fr.value||0))};
+const PN={home:'Home',shop:'Shop',collections:'Collections',cart:'Cart',gallery:'Gallery',custom:'Custom orders',grass:'Artificial grass',about:'About',contact:'Contact',faq:'FAQ',delivery:'Delivery'};
+const pgn=k=>PN[k]||(k.startsWith('shop-')?'Shop · '+k.slice(5):k.startsWith('p-')?'Product page':k);
+const sum=(a,f)=>a.reduce((s,d)=>s+(d[f]||0),0);
+const topN=(a,f,n)=>{const m={};a.forEach(d=>Object.entries(d[f]||{}).forEach(([k,v])=>m[k]=(m[k]||0)+v));return Object.entries(m).sort((x,y)=>y[1]-x[1]).slice(0,n)};
+const stats=()=>{const d7=ST.slice(-7),d14=ST.slice(-14),mx=Math.max(1,...d14.map(d=>d.uv||0)),today=new Date(Date.now()+108e5).toISOString().slice(0,10),t=ST.find(d=>d.d===today)||{uv:0};
+let rn;try{rn=new Intl.DisplayNames(['en'],{type:'region'})}catch(e){}
+const list=(rows,fmt)=>rows.length?`<table>${rows.map(r=>`<tr><td>${esc(fmt(r[0]))}</td><td style="text-align:right">${r[1]}</td></tr>`).join('')}</table>`:'<p style="color:var(--mut)">No data yet.</p>';
+const dk=sum(ST,'dk'),mb=sum(ST,'m'),tot=mb+dk;
+return `<div class="st"><div><b>${t.uv||0}</b>Visitors today</div><div><b>${sum(d7,'uv')}</b>Visitors, 7 days</div><div><b>${sum(ST,'uv')}</b>Visitors, 30 days</div><div><b>${sum(ST,'pv')}</b>Page views, 30 days</div><div><b>${sum(ST,'add')}</b>Added to cart, 30 days</div></div>
+<div class="box"><h3>Daily visitors (last 14 days)</h3>${d14.length?`<div style="display:flex;align-items:flex-end;gap:6px;height:170px;margin-top:16px">${d14.map(d=>`<div style="flex:1;text-align:center"><div title="${d.uv||0} visitors" style="background:#241F1B;height:${Math.round((d.uv||0)/mx*130)+2}px"></div><small style="color:var(--mut)">${d.d.slice(8)}</small></div>`).join('')}</div>`:'<p style="color:var(--mut)">No visits recorded yet.</p>'}</div>
+<div class="g2"><div class="box"><h3>Top pages</h3>${list(topN(ST,'pages',8),pgn)}</div><div class="box"><h3>Most viewed products</h3>${list(topN(ST,'products',8),x=>x)}</div></div>
+<div class="g2"><div class="box"><h3>Countries</h3>${list(topN(ST,'cc',6),c=>rn?(rn.of(c)||c):c)}</div><div class="box"><h3>Devices</h3><p>${tot?Math.round(mb/tot*100):0}% phone · ${tot?Math.round(dk/tot*100):0}% computer</p><p style="color:var(--mut)">Counts are approximate. For exact figures, also switch on Cloudflare Web Analytics for this site.</p></div></div>`};
+function view(){const a=$('#app'),ok=sessionStorage.rf_t;$('#lo').style.display=ok?'':'none';
+if(!ok){a.innerHTML=`<div class="box" style="max-width:380px;margin:60px auto"><h2>Admin login</h2><input id="pw" type="password" placeholder="Password" autocomplete="current-password"><button data-a="login">Sign in</button><p id="msg" class="m"></p></div>`;return}
+if(!D){a.innerHTML='<div class="box"><p class="m">Could not load the store data.</p></div>';return}
+const T=[['p','Products'],['o','Orders'],['f','Delivery'],['v','Stats'],['s','Site settings'],['d','Backup']];
+a.innerHTML=`<div class="tabs">${T.map(t=>`<button class="${tab===t[0]?'on':'g'}" data-a="tab" data-v="${t[0]}">${t[1]}</button>`).join('')}</div>`+(tab==='p'?prods():tab==='o'?ords():tab==='f'?deliv():tab==='v'?stats():tab==='s'?sett():dat())+(note?`<p class="ok">${note}</p>`:'');note='';a.classList.remove('fi');void a.offsetWidth;a.classList.add('fi')}
+const loadO=async()=>{const j=await api('orders');if(j.ok)O=j.orders};
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,v=b.dataset.v;
+if(a==='login'){const j=await api('login',{password:$('#pw').value});if(j.token){sessionStorage.rf_t=j.token;await loadO();view()}else $('#msg').textContent=j.error||'Could not sign in'}
+else if(a==='out'){delete sessionStorage.rf_t;view()}
+else if(a==='tab'){tab=v;ed=null;if(v==='o')await loadO();if(v==='v')await loadS();view()}
+else if(a==='refresh'){await loadO();view()}
+else if(a==='add'){ed=-1;view();scrollTo(0,0)}
+else if(a==='edit'){ed=+v;view();scrollTo(0,0)}
+else if(a==='cancel'){ed=null;view()}
+else if(a==='del'){if(confirm('Delete "'+D.p[+v].n+'"?')){const x=D.p.splice(+v,1);if(!await saveD())D.p.splice(+v,0,x[0]);view()}}
+else if(a==='savep'){const n=$('#fn').value.trim(),c=$('#fc').value.trim(),pv=$('#fp').value,f=$('#fi').files[0];if(!n||!c||pv===''||+pv<0){alert('Name, category and price are required.');return}
+const old=ed<0?null:JSON.stringify(D.p[ed]),p=ed<0?{}:D.p[ed];b.disabled=true;
+if(f){const u=await api('upload',{dataUrl:await rd(f)});if(!u.url){alert(u.error||'Photo upload failed');b.disabled=false;return}p.i=u.url}
+if(!p.i){alert('Please choose a photo.');b.disabled=false;return}
+Object.assign(p,{n,c,p:+pv,d:$('#fd').value.trim(),f:$('#ff').checked?1:0});if(ed<0)D.p.unshift(p);
+if(await saveD())ed=null;else if(ed<0)D.p.shift();else D.p[ed]=JSON.parse(old);view()}
+else if(a==='saves'){Object.assign(D.s,{phone:$('#sp').value.trim(),announce:$('#sa').value.trim(),h1:$('#sh').value.trim(),hp:$('#sx').value.trim(),ig:$('#si').value.trim().replace(/^@/,'')});await saveD();view()}
+else if(a==='addz'){readZ(1);D.s.delivery=D.s.delivery||[];D.s.delivery.push({n:'',f:0});view()}
+else if(a==='delz'){readZ(1);D.s.delivery.splice(+v,1);view()}
+else if(a==='savez'){readZ();await saveD();view()}
+else if(a==='exp'){const u=URL.createObjectURL(new Blob([JSON.stringify(D)],{type:'application/json'})),l=document.createElement('a');l.href=u;l.download='data.json';l.click()}});
+document.addEventListener('input',e=>{if(e.target.id==='q'){const t=e.target.value.toLowerCase();document.querySelectorAll('tr[data-t]').forEach(r=>r.style.display=r.dataset.t.includes(t)?'':'none')}});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.id==='pw')document.querySelector('[data-a=login]').click()});
+init();
+</script></body></html>
