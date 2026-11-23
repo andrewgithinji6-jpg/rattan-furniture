@@ -6,10 +6,9 @@ const c=cfg(env);if(!c)return json({error:'M-Pesa is not set up yet. Please orde
 const phone=norm(b.phone);if(!phone)return json({error:'Enter a valid Safaricom number, e.g. 0712 345 678'},400);
 const D=await getData(env);if(!D)return json({error:'Store data is not published yet'},503);
 let total=0;const items=[];
-for(const it of(b.items||[]).slice(0,30)){const p=D.p.find(x=>x.n===it.n);if(!p)continue;const q=Math.min(20,Math.max(1,+it.q||1));total+=p.p*q;items.push({n:p.n,q,w:String(it.w||''),c:String(it.c||''),p:p.p})}
+for(const it of(b.items||[]).slice(0,30)){const c2=D.p.filter(x=>x.n===it.n),p=c2.find(x=>x.p===+it.p)||c2[0];if(!p)continue;const q=Math.min(20,Math.max(1,+it.q||1));total+=p.p*q;items.push({n:p.n,q,w:String(it.w||''),c:String(it.c||''),p:p.p})}
 if(!items.length)return json({error:'Your cart is empty'},400);
-const zones=(D.s&&D.s.delivery)||[];let fee=0,zone='';
-if(zones.length){const z=zones.find(x=>x.n===b.zone);if(!z)return json({error:'Please choose your delivery location'},400);zone=z.n;fee=Math.max(0,Math.round(+z.f||0));const free=+D.s.free||0;if(free>0&&total>=free)fee=0}
+let fee=0,zone='';
 const grand=total+fee,amount=Math.max(1,Math.round(+env.MPESA_TEST_AMOUNT||grand)),ts=stamp(),ref='RF'+Math.random().toString(36).slice(2,7).toUpperCase();
 try{const r=await fetch(base(env)+'/mpesa/stkpush/v1/processrequest',{method:'POST',headers:{Authorization:'Bearer '+await token(env),'content-type':'application/json'},body:JSON.stringify({BusinessShortCode:c.sc,Password:pwd(c,ts),Timestamp:ts,TransactionType:c.type,Amount:amount,PartyA:phone,PartyB:c.pb,PhoneNumber:phone,CallBackURL:new URL(request.url).origin+'/api/pay-callback',AccountReference:ref,TransactionDesc:'Rattan order'})});
 const j=await r.json();if(j.ResponseCode!=='0')return json({error:j.errorMessage||j.ResponseDescription||'Could not send the M-Pesa prompt'},502);

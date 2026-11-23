@@ -57,13 +57,16 @@ return `<div class="st"><div><b>${t.uv||0}</b>Visitors today</div><div><b>${sum(
 <div class="box"><h3>Daily visitors (last 14 days)</h3>${d14.length?`<div style="display:flex;align-items:flex-end;gap:6px;height:170px;margin-top:16px">${d14.map(d=>`<div style="flex:1;text-align:center"><div title="${d.uv||0} visitors" style="background:#241F1B;height:${Math.round((d.uv||0)/mx*130)+2}px"></div><small style="color:var(--mut)">${d.d.slice(8)}</small></div>`).join('')}</div>`:'<p style="color:var(--mut)">No visits recorded yet.</p>'}</div>
 <div class="g2"><div class="box"><h3>Top pages</h3>${list(topN(ST,'pages',8),pgn)}</div><div class="box"><h3>Most viewed products</h3>${list(topN(ST,'products',8),x=>x)}</div></div>
 <div class="g2"><div class="box"><h3>Countries</h3>${list(topN(ST,'cc',6),c=>rn?(rn.of(c)||c):c)}</div><div class="box"><h3>Devices</h3><p>${tot?Math.round(mb/tot*100):0}% phone · ${tot?Math.round(dk/tot*100):0}% computer</p><p style="color:var(--mut)">Counts are approximate. For exact figures, also switch on Cloudflare Web Analytics for this site.</p></div></div>`};
+const SK=[['tuff','Tuff Grass'],['canopy','Canopy Fence']];
+const readSec=()=>{D.s.sections=D.s.sections||{};SK.forEach(([k])=>{D.s.sections[k]=D.s.sections[k]||{d:'',i:[]};const e=$('#sd-'+k);if(e)D.s.sections[k].d=e.value.trim()})};
+const secs=()=>{readSec();return `<p style="color:var(--mut)">Customers tap "Enquire on WhatsApp" on these pages to ask about details, sizes and prices. Add a short description and photos for each.</p>`+SK.map(([k,t])=>{const x=D.s.sections[k];return `<div class="box"><h3>${t}</h3><label>Description shown on the page (leave empty for the default)</label><textarea id="sd-${k}" rows="3">${esc(x.d||'')}</textarea><label>Photos</label><div style="display:flex;gap:12px;flex-wrap:wrap;margin:10px 0 16px">${(x.i||[]).map((u,j)=>`<div><img src="${esc(im(u))}" alt="" style="width:100px;height:100px;object-fit:cover"><br><button class="r" style="padding:6px 10px;margin-top:6px" data-a="delsi" data-k="${k}" data-v="${j}">Remove</button></div>`).join('')||'<span style="color:var(--mut)">No photos yet.</span>'}</div><input id="sf-${k}" type="file" accept="image/*" multiple><button data-a="savesec" data-k="${k}">Save ${t}</button></div>`}).join('')};
 function view(){const a=$('#app'),ok=sessionStorage.rf_t;$('#lo').style.display=ok?'':'none';
 if(!ok){a.innerHTML=`<div class="box" style="max-width:380px;margin:60px auto"><h2>Admin login</h2><input id="pw" type="password" placeholder="Password" autocomplete="current-password"><button data-a="login">Sign in</button><p id="msg" class="m"></p></div>`;return}
 if(!D){a.innerHTML='<div class="box"><p class="m">Could not load the store data.</p></div>';return}
-const T=[['p','Products'],['o','Orders'],['f','Delivery'],['v','Stats'],['s','Site settings'],['d','Backup']];
-a.innerHTML=`<div class="tabs">${T.map(t=>`<button class="${tab===t[0]?'on':'g'}" data-a="tab" data-v="${t[0]}">${t[1]}</button>`).join('')}</div>`+(tab==='p'?prods():tab==='o'?ords():tab==='f'?deliv():tab==='v'?stats():tab==='s'?sett():dat())+(note?`<p class="ok">${note}</p>`:'');note='';a.classList.remove('fi');void a.offsetWidth;a.classList.add('fi')}
+const T=[['p','Products'],['o','Orders'],['x','Grass & Fence'],['v','Stats'],['s','Site settings'],['d','Backup']];
+a.innerHTML=`<div class="tabs">${T.map(t=>`<button class="${tab===t[0]?'on':'g'}" data-a="tab" data-v="${t[0]}">${t[1]}</button>`).join('')}</div>`+(tab==='p'?prods():tab==='o'?ords():tab==='x'?secs():tab==='v'?stats():tab==='s'?sett():dat())+(note?`<p class="ok">${note}</p>`:'');note='';a.classList.remove('fi');void a.offsetWidth;a.classList.add('fi')}
 const loadO=async()=>{const j=await api('orders');if(j.ok)O=j.orders};
-document.addEventListener('click',async e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,v=b.dataset.v;
+document.addEventListener('click',async e=>{const b=e.target.closest('[data-a]');if(!b)return;const a=b.dataset.a,v=b.dataset.v,k=b.dataset.k;
 if(a==='login'){const j=await api('login',{password:$('#pw').value});if(j.token){sessionStorage.rf_t=j.token;await loadO();view()}else $('#msg').textContent=j.error||'Could not sign in'}
 else if(a==='out'){delete sessionStorage.rf_t;view()}
 else if(a==='tab'){tab=v;ed=null;if(v==='o')await loadO();if(v==='v')await loadS();view()}
@@ -79,6 +82,8 @@ if(!p.i){alert('Please choose a photo.');b.disabled=false;return}
 Object.assign(p,{n,c,p:+pv,d:$('#fd').value.trim(),f:$('#ff').checked?1:0});if(ed<0)D.p.unshift(p);
 if(await saveD())ed=null;else if(ed<0)D.p.shift();else D.p[ed]=JSON.parse(old);view()}
 else if(a==='saves'){Object.assign(D.s,{phone:$('#sp').value.trim(),announce:$('#sa').value.trim(),h1:$('#sh').value.trim(),hp:$('#sx').value.trim(),ig:$('#si').value.trim().replace(/^@/,'')});await saveD();view()}
+else if(a==='delsi'){readSec();D.s.sections[k].i.splice(+v,1);view()}
+else if(a==='savesec'){readSec();const fs=[...$('#sf-'+k).files];b.disabled=true;for(const f of fs){const u=await api('upload',{dataUrl:await rd(f)});if(!u.url){alert(u.error||'Photo upload failed');b.disabled=false;return}D.s.sections[k].i.push(u.url)}await saveD();view()}
 else if(a==='addz'){readZ(1);D.s.delivery=D.s.delivery||[];D.s.delivery.push({n:'',f:0});view()}
 else if(a==='delz'){readZ(1);D.s.delivery.splice(+v,1);view()}
 else if(a==='savez'){readZ();await saveD();view()}
