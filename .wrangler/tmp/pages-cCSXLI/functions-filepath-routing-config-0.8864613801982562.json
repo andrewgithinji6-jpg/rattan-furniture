@@ -1,0 +1,69 @@
+{
+  "routes": [
+    {
+      "routePath": "/api/admin",
+      "mountPath": "/api",
+      "method": "POST",
+      "module": [
+        "api/admin.js:onRequestPost"
+      ]
+    },
+    {
+      "routePath": "/api/data",
+      "mountPath": "/api",
+      "method": "GET",
+      "module": [
+        "api/data.js:onRequestGet"
+      ]
+    },
+    {
+      "routePath": "/api/img",
+      "mountPath": "/api",
+      "method": "GET",
+      "module": [
+        "api/img.js:onRequestGet"
+      ]
+    },
+    {
+      "routePath": "/api/instagram",
+      "mountPath": "/api",
+      "method": "GET",
+      "module": [
+        "api/instagram.js:onRequestGet"
+      ]
+    },
+    {
+      "routePath": "/api/pay",
+      "mountPath": "/api",
+      "method": "POST",
+      "module": [
+        "api/pay.js:onRequestPost"
+      ]
+    },
+    {
+      "routePath": "/api/pay-callback",
+      "mountPath": "/api",
+      "method": "POST",
+      "module": [
+        "api/pay-callback.js:onRequestPost"
+      ]
+    },
+    {
+      "routePath": "/api/pay-status",
+      "mountPath": "/api",
+      "method": "GET",
+      "module": [
+        "api/pay-status.js:onRequestGet"
+      ]
+    },
+    {
+      "routePath": "/api/track",
+      "mountPath": "/api",
+      "method": "POST",
+      "module": [
+        "api/track.js:onRequestPost"
+      ]
+    }
+  ],
+  "baseURL": "/"
+}
