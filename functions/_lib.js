@@ -10,7 +10,20 @@ export const authed=async(req,env)=>{const[t,h]=(req.headers.get('x-admin-token'
 export const pwOk=async(env,p)=>{if(!env.ADMIN_PASSWORD)return false;const d=async s=>hex(await crypto.subtle.digest('SHA-256',enc.encode(String(s))));return same(await d(p||''),await d(env.ADMIN_PASSWORD))};
 export const norm=p=>{let d=String(p||'').replace(/\D/g,'');if(/^0[17]\d{8}$/.test(d))d='254'+d.slice(1);else if(/^[17]\d{8}$/.test(d))d='254'+d;return /^254[17]\d{8}$/.test(d)?d:null};
 export const base=env=>env.MPESA_ENV==='production'?'https://api.safaricom.co.ke':'https://sandbox.safaricom.co.ke';
-export const cfg=env=>{if(!env.MPESA_CONSUMER_KEY||!env.MPESA_CONSUMER_SECRET||!env.MPESA_PASSKEY)return null;return{sc:env.MPESA_SHORTCODE||'174379',pb:env.MPESA_PARTYB||env.MPESA_SHORTCODE||'174379',type:env.MPESA_TRANSACTION_TYPE||'CustomerPayBillOnline',pk:env.MPESA_PASSKEY}};
+export const cfg=env=>{
+  if(!env.MPESA_CONSUMER_KEY||!env.MPESA_CONSUMER_SECRET||!env.MPESA_PASSKEY)return null;
+
+  const production=env.MPESA_ENV==='production';
+
+  if(production&&(!env.MPESA_SHORTCODE||!env.MPESA_PARTYB))return null;
+
+  return {
+    sc:env.MPESA_SHORTCODE||'174379',
+    pb:env.MPESA_PARTYB||env.MPESA_SHORTCODE||'174379',
+    type:env.MPESA_TRANSACTION_TYPE||'CustomerPayBillOnline',
+    pk:env.MPESA_PASSKEY
+  };
+};
 export const token=async env=>{const r=await fetch(base(env)+'/oauth/v1/generate?grant_type=client_credentials',{headers:{Authorization:'Basic '+btoa(env.MPESA_CONSUMER_KEY+':'+env.MPESA_CONSUMER_SECRET)}});const j=await r.json();if(!j.access_token)throw new Error('M-Pesa login failed');return j.access_token};
 export const stamp=()=>new Date().toISOString().replace(/\D/g,'').slice(0,14);
 export const pwd=(c,ts)=>btoa(c.sc+c.pk+ts);

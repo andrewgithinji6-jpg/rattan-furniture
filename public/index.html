@@ -32,7 +32,59 @@ main{min-height:60vh;transition:opacity .22s ease}body[data-p=in] main{padding-t
 .lk{letter-spacing:.18em;text-transform:uppercase;font-size:13px;font-weight:600;border-bottom:1px solid currentColor;padding-bottom:3px;display:inline-block;margin:0 10px 8px}
 .chev{position:absolute;bottom:28px;left:50%;width:34px;margin-left:-17px;opacity:.85;animation:bob 2s ease-in-out infinite}@keyframes bob{50%{transform:translateY(7px)}}
 .sh{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:34px}.sh h2,.pt{font-size:clamp(32px,4vw,46px)}.pt{margin:0 0 20px}
-.ct{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:22px}.ct .im{aspect-ratio:3/4;background:#fff center/cover;transition:transform .5s}.ct a{display:block;text-align:center;overflow:hidden}.ct a:hover .im{transform:scale(1.04)}.ct .lab{margin-top:16px}
+.ct {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 22px;
+}
+
+.ct .im {
+  aspect-ratio: 3 / 4;
+  background: #fff center / cover no-repeat;
+  transition: transform .5s;
+}
+
+.ct a {
+  display: block;
+  text-align: center;
+  overflow: hidden;
+}
+
+.ct a:hover .im {
+  transform: scale(1.04);
+}
+
+.ct .lab {
+  margin-top: 16px;
+}
+
+/* Categories positioned inside the hero */
+.hero-shop .ct {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.hero-shop .ct .lab {
+  color: #fff;
+  font-weight: 600;
+  text-shadow: 0 2px 8px rgba(0,0,0,.55);
+}
+
+@media (max-width: 600px) {
+  .hero-shop .ct {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .hero-shop .ct .im {
+    aspect-ratio: 4 / 3;
+  }
+
+  .hero-shop .ct .lab {
+    margin-top: 9px;
+    font-size: 13px;
+  }
+}
 .pr{display:grid;grid-template-columns:1fr 1fr;gap:36px;margin-bottom:36px}
 .pr a{border-radius:36px;min-height:440px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;background:var(--c) center/cover;color:#fff;padding:30px}
 .pr a.im:before{content:'';position:absolute;inset:0;background:rgba(25,17,10,.42)}.pr a>*{position:relative}
@@ -69,7 +121,146 @@ footer{display:none;background:var(--ft);color:#E9E1D8;padding:70px 0 30px;margi
 .wa{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));width:58px;height:58px;border-radius:50%;background:#fff;box-shadow:0 6px 24px rgba(0,0,0,.25);z-index:40;display:flex;align-items:center;justify-content:center}.wa svg{width:32px;height:32px}
 @media(max-width:900px){.pg4{grid-template-columns:repeat(2,1fr)}.pr,.split,.pdp{grid-template-columns:1fr}.tri{grid-template-columns:1fr}.fg{grid-template-columns:1fr 1fr}.hd1{grid-template-columns:auto 1fr auto;padding:12px 18px 4px}.hd2{padding:6px 18px 12px;gap:20px}.ann{padding:7px 18px}.w,.mc{padding:0 18px}.hero{padding-top:190px}.pr a{min-height:340px}}
 @media(max-width:560px){#tp{display:none}.ann{justify-content:center;font-size:10px;letter-spacing:.1em}.sq{font-size:11px}.logo b{font-size:20px}.ic{gap:14px}.ic svg{width:23px}.pg4{gap:14px}}
-.igg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.igg a{aspect-ratio:1;background:#F1EEE9;display:block;overflow:hidden}.igg img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.igg a:hover img{transform:scale(1.05)}@media(max-width:700px){.igg{grid-template-columns:repeat(2,1fr)}}.pc .row{margin-top:10px}#mb{transition:opacity .18s ease}.pimg{position:relative}.arw{position:absolute;top:50%;width:48px;height:48px;margin-top:-24px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:var(--ink);font:400 32px/1 Inter,sans-serif;padding:0 0 4px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s}.arw:hover{background:#fff;transform:scale(1.06)}.arw.l{left:14px}.arw.r{right:14px}.pn{display:flex;justify-content:space-between;gap:12px;color:var(--mut);margin-bottom:14px}.pn a{border-bottom:1px solid currentColor}</style><link rel="preload" as="image" href="img/hero.webp">
+.igg{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.igg a{aspect-ratio:1;background:#F1EEE9;display:block;overflow:hidden}.igg img{width:100%;height:100%;object-fit:cover;transition:transform .5s}.igg a:hover img{transform:scale(1.05)}@media(max-width:700px){.igg{grid-template-columns:repeat(2,1fr)}}.pc .row{margin-top:10px}#mb{transition:opacity .18s ease}.pimg{position:relative}.arw{position:absolute;top:50%;width:48px;height:48px;margin-top:-24px;border-radius:50%;border:0;background:rgba(255,255,255,.9);color:var(--ink);font:400 32px/1 Inter,sans-serif;padding:0 0 4px;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.2);display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s}.arw:hover{background:#fff;transform:scale(1.06)}.arw.l{left:14px}.arw.r{right:14px}.pn{display:flex;justify-content:space-between;gap:12px;color:var(--mut);margin-bottom:14px}.pn a{border-bottom:1px solid currentColor}
+
+/* Homepage hero and Shop by Space layout */
+
+/* Desktop: spacious category cards */
+.hero-shop .hero-categories {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.hero-shop .ct {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.hero-shop .ct a {
+  min-width: 0;
+  text-decoration: none;
+}
+
+.hero-shop .ct .im {
+  width: 100%;
+  aspect-ratio: 5 / 4;
+  background-position: center;
+  background-size: cover;
+  border-radius: 4px;
+}
+
+.hero-shop .ct .lab {
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.35;
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: center;
+  text-shadow: 0 2px 7px rgba(0,0,0,.8);
+}
+
+/* Smaller desktop and tablets */
+@media (max-width: 1000px) and (min-width: 561px) {
+  .hero-shop .ct {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+/* Mobile: preserve the working two-column layout */
+@media (max-width: 560px) {
+  .hero-shop .ct {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .hero-shop .ct .im {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* Integrated beach hero with Shop by Space */
+.hero-shop {
+  min-height: 680px;
+  height: auto;
+  padding: 150px 24px 55px;
+  align-items: flex-end;
+  background-position: center;
+  background-size: cover;
+}
+
+.hero-shop::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,.08) 0%,
+    rgba(0,0,0,.12) 35%,
+    rgba(0,0,0,.68) 100%
+  );
+}
+
+.hero-categories {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 1440px);
+  margin: 0 auto;
+  text-align: left;
+}
+
+.hero-category-heading {
+  margin-bottom: 18px;
+  color: #fff;
+}
+
+.hero-category-heading .lab {
+  color: rgba(255,255,255,.85);
+}
+
+.hero-category-heading h2 {
+  margin: 7px 0 0;
+  color: #fff;
+  font-size: clamp(28px, 4vw, 44px);
+}
+
+/* Keep category cards readable over the photograph */
+.hero-shop .cats,
+.hero-shop .categories {
+  position: relative;
+  z-index: 2;
+}
+
+/* Mobile */
+@media (max-width: 560px) {
+  .hero-shop {
+    height: auto;
+    min-height: 520px;
+    padding: 125px 16px 38px;
+
+    /* Mobile background adjustment */
+    background-size: auto 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
+
+  .hero-category-heading {
+    margin-bottom: 14px;
+  }
+
+  .hero-category-heading h2 {
+    font-size: 29px;
+  }
+
+  .hero-shop .chev {
+    display: none;
+  }
+}
+
+</style><link rel="preload" as="image" href="img/hero.webp">
 </head><body>
 <header><div class="ann"><span id="ta"></span><span id="tp"></span></div>
 <div class="hd1"><a class="logo" href="#home" aria-label="Rattan Furniture Kenya"><b>RATTAN</b><i>FURNITURE KENYA</i></a>
@@ -78,7 +269,7 @@ footer{display:none;background:var(--ft);color:#E9E1D8;padding:70px 0 30px;margi
 <a href="#cart" aria-label="Cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 8h13l1 12.5h-15z"/><path d="M9 10.5V7a3 3 0 0 1 6 0v3.5"/></svg><span id="cc"></span></a></div></div>
 <nav class="hd2"><a href="#shop">Shop</a><a href="#collections">Collections</a><a href="#custom">Custom Orders</a><a href="#grass">Artificial Grass</a><a href="#tuffgrass">Tuff Grass</a><a href="#canopyfence">Canopy Fence</a><a href="#gallery">Gallery</a><a href="#about">About</a><a href="#contact">Contact</a></nav></header>
 <main id="app"><p class="ld">Loading…</p></main>
-<footer><div class="w"><div class="fg"><div><img src="" id="fl" alt="Rattan Furniture Kenya logo" style="width:96px;border-radius:10px"><p class="fb">Sunproof, waterproof outdoor furniture. Hand-woven synthetic rattan on a rust-proof metal frame.</p><span id="fph"></span><span>Kiambu County, Kenya</span><span id="fig"></span><a class="fp" href="#custom">Furnishing a hotel or Airbnb? Request a bulk quotation</a></div>
+<footer><div class="w"><div class="fg"><div><img src="" id="fl" alt="Rattan Furniture Kenya logo" style="width:96px;border-radius:10px"><p class="fb">Sunproof, waterproof outdoor furniture. Hand-woven synthetic rattan.</p><span id="fph"></span><span>Kiambu County, Kenya</span><span id="fig"></span><a class="fp" href="#custom">Furnishing a hotel or Airbnb? Request a bulk quotation</a></div>
 <div><h4>Shop</h4><div id="fs"></div></div>
 <div><h4>About</h4><a href="#about">About us</a><a href="#gallery">Gallery</a><a href="#custom">Custom orders</a><a href="#grass">Artificial grass</a><a href="#tuffgrass">Tuff Grass</a><a href="#canopyfence">Canopy Fence</a></div>
 <div><h4>Help</h4><a href="#contact">Contact</a><a href="#faq">FAQ</a><a href="#delivery">Delivery</a><a href="#cart">Cart &amp; M-Pesa checkout</a><a href="admin.html">Admin</a></div>
@@ -90,7 +281,7 @@ const IMG={"a1": "img/a1.webp", "a2": "img/a2.webp", "a3": "img/a3.webp", "a4": 
 let WA='254721673578',S={},$=s=>document.querySelector(s),money=n=>'KES '+n.toLocaleString('en-KE'),wa=t=>'https://wa.me/'+WA+'?text='+encodeURIComponent(t);
 const B=[['Malindi 8-Seater Dining Set','Dining','a1',95000,'Black weave with red cushions, seats eight'],['Mombasa Canopy Garden Swing','Swings','a2',68000,'Two-seat swing with weaved canopy roof'],['Lamu Curved Daybed Lounge','Daybeds','a3',120000,'Honey weave, sea-green cushions, glass-top table'],['Kilifi Arch Booth Set','Sofas','a4',185000,'Two sofas, table and trellis arch for restaurants'],['Nyali U-Shape Lounge Set','Sofas','a5',210000,'White weave, leopard and mustard cushions'],['Shanzu Curved Sectional','Sofas','a6',165000,'Black weave, red cushions, round coffee table'],['Diani Canopy Daybed','Daybeds','a7',98000,'White round daybed with fold-away canopy'],['Vipingo Double Egg Swing & Chairs','Swings','a8',135000,'Brown weave, two swivel chairs and table'],['Funzi Egg Lounge Set','Chairs','a9',145000,'Double egg swing, two bowl chairs, S-table'],['Watamu Single Egg Swing','Swings','a10',48000,'Cream weave, stand and yellow cushions'],['Kikambala Striped Corner Sofa','Sofas','a11',175000,'Corner sofa with striped cushions'],['Gede Planter Boxes','Planters','a12',12000,'Weaved planters with inner liners, per box'],['Takaungu Swivel Bowl Chairs','Chairs','a13',32000,'Black swivel bowl chair, each, tables available'],['Pate Round Dining Set','Dining','a14',115000,'Round glass-top table with four curved seats'],['Kwale Bistro Set','Dining','n1',45000,'Two armchairs and a round glass-top table, brown weave, orange cushions'],['Kisite Bowl Chairs & S-Table','Chairs','n2',78000,'White weave bowl chairs with yellow cushions and an S-shaped glass-top table'],['Tana Loveseat Set','Sofas','n3',88000,'Brown weave loveseat, two armchairs and glass-top table, beige cushions'],['Shimoni Bar Table','Tables','m1',38000,'Round bar-height table in dark woven rattan with a ring footrest base'],['Ngomeni Cord Chairs & Side Table','Chairs','m2',72000,'Two cord-woven armchairs with cream cushions and a glass-top side table'],['Rusinga Garden Armchair','Chairs','m3',38000,'Natural-tone woven armchair with cream seat and back cushions'],['Vanga Cord Dining Set','Dining','m4',125000,'Square table with four cord-woven armchairs and cream cushions'],['Mida Pool Sectional','Sofas','m5',260000,'Grey woven corner sectional with matching coffee table']];
 const FT=[6,9,4,3,2,14,15,16];
-const DEF={s:{phone:'0721 673 578',announce:'Sunproof · Waterproof · Rust-proof frame',h1:'Furniture made for the sun, the sea and the sunset.',hp:'Hand-woven synthetic rattan on a rust-proof metal frame, for beachfront homes, ocean-view terraces and rooftop stays.',ig:'',free:0,delivery:[]},p:B.map((b,k)=>({n:b[0],c:b[1],i:b[2],p:b[3],d:b[4],f:FT.includes(k)?1:0}))};
+const DEF={s:{phone:'0721 673 578',announce:'Sunproof · Waterproof',h1:'Furniture made for the sun, the sea and the sunset.',hp:'Hand-woven synthetic rattan for beachfront homes, ocean-view terraces and rooftop stays.',ig:'',free:0,delivery:[]},p:B.map((b,k)=>({n:b[0],c:b[1],i:b[2],p:b[3],d:b[4],f:FT.includes(k)?1:0}))};
 let P=[],CATS=[];
 const im=k=>/^(data:|img\/|\/api\/|https?:)/.test(k)?k:(IMG[k]||k);
 function setData(D){S=D.s;S.delivery=[];S.free=0;S.sections=S.sections||{};S.covers=S.covers&&typeof S.covers==='object'?S.covers:{};S.ig=String(S.ig||'').trim().replace(/^https?:\/\/(www\.)?instagram\.com\//i,'').replace(/^@/,'').replace(/[\/?].*$/,'');P=D.p.map((x,k)=>({...x,id:k}));const _u=[...new Set(P.map(x=>x.c))],_o=Array.isArray(S.categories)?S.categories:[];CATS=[..._o.filter(c=>_u.includes(c)),..._u.filter(c=>!_o.includes(c))].map(c=>[c,S.covers[c]||P.find(x=>x.c===c).i]);const d=S.phone.replace(/\D/g,'');WA=d.startsWith('254')?d:'254'+d.replace(/^0/,'')}
@@ -101,25 +292,101 @@ const card=p=>`<article class="pc"><a class="pi" href="#p-${p.id}"><img src="${i
 const pgrid=L=>`<div class="pg4">${L.map(card).join('')}</div>`;
 const cats=()=>`<div class="ct">${CATS.map(c=>`<a href="#cat-${encodeURIComponent(c[0])}"><div class="im" style="background-image:url(${esc(im(c[1]))})"></div><div class="lab">${esc(c[0])}</div></a>`).join('')}</div>`;
 const SH=(t,l,h)=>`<div class="sh"><h2>${t}</h2>${l?`<a class="lab" href="${h}">${l}</a>`:''}</div>`;
-const FAQ=[['Is the furniture sunproof and waterproof?','Yes. Our furniture is woven from synthetic rattan that is sunproof and waterproof, on a strong rust-proof metal frame, so it suits gardens, balconies, beachfronts and rooftops.'],['Do you deliver across Kenya?','Yes. We deliver across Kenya. After you pay, we open WhatsApp so our team can arrange delivery with you.'],['How much does delivery cost?','The fee depends on your location. When you place your order we open WhatsApp and confirm the delivery fee with you there.'],['Can I order a custom size or colour?','Yes. We can customise size, weave colour and cushion fabric, and take bulk orders for hotels, lodges and Airbnb hosts.'],['How do I pay?','Pay by M-Pesa at checkout. You get a prompt on your phone, and once it is confirmed we take you to WhatsApp to arrange delivery.'],['Do you install artificial grass?','Yes. We install artificial grass in 25 mm to 40 mm pile heights for balconies, rooftops and gardens.']];
+const FAQ=[['Is the furniture sunproof and waterproof?','Yes. Our furniture is woven from synthetic rattan that is sunproof and waterproof, so it suits gardens, balconies, beachfronts and rooftops.'],['Do you deliver across Kenya?','Yes. We deliver across Kenya. After you pay, we open WhatsApp so our team can arrange delivery with you.'],['How much does delivery cost?','The fee depends on your location. When you place your order we open WhatsApp and confirm the delivery fee with you there.'],['Can I order a custom size or colour?','Yes. We can customise size, weave colour and cushion fabric, and take bulk orders for hotels, lodges and Airbnb hosts.'],['How do I pay?','Pay by M-Pesa at checkout. You get a prompt on your phone, and once it is confirmed we take you to WhatsApp to arrange delivery.'],['Do you install artificial grass?','Yes. We install artificial grass in 25 mm to 40 mm pile heights for balconies, rooftops and gardens.']];
 const faq=()=>`<div style="max-width:900px;margin:0 auto"><div class="lab mut" style="margin-bottom:12px">Help &amp; info</div><h2 class="pt">Frequently Asked Questions</h2>${FAQ.map(f=>`<details><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('')}</div>`;
 const SEC={tuff:{t:'Tuff Grass',d:'Artificial grass for gardens, balconies, rooftops and play areas. Message us on WhatsApp for sizes, prices and installation.',m:'Hi, I’d like details about Tuff Grass.',p:'tuffgrass',c:'tp'},canopy:{t:'Canopy Fence',d:'Ask us on WhatsApp for details, designs, sizes and prices.',m:'Hi, I’d like details about Canopy Fence.',p:'canopyfence',c:'dk'}};
 const secOf=k=>{const d=SEC[k],x=(S.sections&&S.sections[k])||{};return{t:d.t,d:x.d||d.d,i:Array.isArray(x.i)?x.i:[],m:d.m}};
 const secTile=k=>{const x=secOf(k),h=x.i[0];return `<a class="${h?'im':SEC[k].c}" href="#${SEC[k].p}"${h?` style="--c:url(${im(h)})"`:''}><span class="lab">Ask on WhatsApp</span><h3>${x.t}</h3><span class="lk">Enquire →</span></a>`};
 const secPage=k=>{const x=secOf(k);return `<div class="w sec"><div class="crumb lab"><a href="#home">Home</a> / ${x.t}</div><h2 class="pt">${x.t}</h2><p class="mut" style="max-width:720px;font-size:18px;margin-bottom:28px">${esc(x.d)}</p><a class="bk" target="_blank" rel="noopener" href="${wa(x.m)}">Enquire on WhatsApp</a>${x.i.length?`<div class="gal" style="margin-top:44px">${x.i.map(u=>`<img src="${esc(im(u))}" alt="${esc(x.t)}" loading="lazy">`).join('')}</div>`:''}<p style="margin-top:40px"><a class="lk" href="#shop">Continue shopping →</a></p></div>`};
 const V={
-home:()=>{const mn=P.length?Math.min(...P.map(x=>x.p)):0;return `<section class="hero" style="--hero:url(${IMG.hero})"><div><h1>${S.h1}</h1><p>${S.hp}</p><a class="lk" href="#shop">Shop collections →</a><a class="lk" href="#custom">Request a custom set →</a></div><svg class="chev" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 6l7 6 7-6M5 13l7 6 7-6"/></svg></section>
-<div class="w sec">${SH('Shop by space','View all','#collections')}${cats()}</div>
-<div class="w sec"><div class="pr"><a class="im" href="#shop" style="--c:url(${IMG.a7})"><h3>Best Sellers</h3><span class="lk">Shop now →</span></a><a class="tp" href="#custom"><span class="lab">Hotels, lodges &amp; Airbnb hosts</span><h3>Custom &amp; bulk orders</h3><span class="lk">Request quotation →</span></a></div>
-<div class="pr" style="margin-bottom:0"><a class="dk" href="#shop"><span class="lab">Starting at</span><h3>${money(mn)}</h3><span class="lk">Shop now →</span></a><a class="im" href="#grass" style="--c:url(${IMG.a8})"><h3>Artificial grass installation</h3><span class="lk">Get a quote →</span></a></div><div class="pr" style="margin:36px 0 0">${secTile('tuff')}${secTile('canopy')}</div></div>
-<div class="w"><div class="feat"><div><b class="lab">Sunproof</b><span>Colour holds on open terraces</span></div><div><b class="lab">Waterproof</b><span>Built for rain and sea spray</span></div><div><b class="lab">Rust-proof frame</b><span>Strong metal under every weave</span></div><div><b class="lab">Made to order</b><span>Your size, weave and cushions</span></div></div></div>
+
+home:()=>{const mn=P.length?Math.min(...P.map(x=>x.p)):0;return `
+<section class="hero hero-shop" style="--hero:url(${IMG.hero})">
+  <div class="hero-categories">
+    <div class="hero-category-heading">
+      <span class="lab">EXPLORE OUR COLLECTIONS</span>
+      <h2>Shop by space</h2>
+    </div>
+    ${cats()}
+  </div>
+  <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M5 6l7 6 7-6M5 13l7 6 7-6"/>
+  </svg>
+</section>
+
+<div class="w sec">
+  <div class="pr">
+    <a class="im" href="#shop" style="--c:url(${IMG.a7})">
+      <h3>Best Sellers</h3><span class="lk">Shop now →</span>
+    </a>
+    <a class="tp" href="#custom">
+      <span class="lab">Hotels, lodges &amp; Airbnb hosts</span>
+      <h3>Custom &amp; bulk orders</h3><span class="lk">Request quotation →</span>
+    </a>
+  </div>
+  <div class="pr" style="margin-bottom:0">
+    <a class="dk" href="#shop">
+      <span class="lab">Starting at</span><h3>${money(mn)}</h3><span class="lk">Shop now →</span>
+    </a>
+    <a class="im" href="#grass" style="--c:url(${IMG.a8})">
+      <h3>Artificial grass installation</h3><span class="lk">Get a quote →</span>
+    </a>
+  </div>
+  <div class="pr" style="margin:36px 0 0">${secTile('tuff')}${secTile('canopy')}</div>
+</div>
+
+<div class="w">
+  <div class="feat">
+    <div><b class="lab">Sunproof</b><span>Colour holds on open terraces</span></div>
+    <div><b class="lab">Waterproof</b><span>Built for rain and sea spray</span></div>
+    <div><span>Strong metal under every weave</span></div>
+    <div><b class="lab">Made to order</b><span>Your size, weave and cushions</span></div>
+  </div>
+</div>
+
 <div class="w sec">${SH('Best sellers','View all','#shop')}${pgrid(P.filter(x=>x.f).slice(0,8))}</div>
-<section class="split"><div style="--c:url(${IMG.a4})"></div><div><span class="lab mut">For coastal &amp; rooftop spaces</span><h2>Designed to sit beside antique stone and modern glass.</h2><p>From beachfront villas to Airbnb rooftops, we size, colour and cushion every set to your space. Send your terrace dimensions and we will quote.</p><a class="bk" href="#custom">Book a free consultation</a></div></section>
-<div class="w sec"><div class="stp"><div><h3>1. Choose</h3><p>Pick a model, weave colour and cushion fabric.</p></div><div><h3>2. Pay</h3><p>Pay by M-Pesa. You get a prompt on your phone.</p></div><div><h3>3. Confirm</h3><p>We open WhatsApp so our team can arrange delivery with you.</p></div><div><h3>4. Deliver</h3><p>Delivered and set up at your home or property.</p></div></div></div>
-<div class="w" style="padding-bottom:30px"><div class="lab" style="margin-bottom:22px">Explore Rattan Furniture Kenya</div>${CATS.map(c=>`<a class="chip lab" href="#cat-${encodeURIComponent(c[0])}">${c[0]}</a>`).join('')}<a class="chip lab" href="#gallery">Gallery</a><a class="chip lab" href="#custom">Custom orders</a><a class="chip lab" href="#grass">Artificial grass</a><a class="chip lab" href="#tuffgrass">Tuff Grass</a><a class="chip lab" href="#canopyfence">Canopy Fence</a><a class="chip lab" href="#about">About us</a><a class="chip lab" href="#contact">Contact</a></div>
-<section class="band"><p>We make high-quality outdoor furniture in Kiambu County from synthetic rattan woven on a strong, rust-proof metal structure.</p><p>It is sunproof and waterproof, so it suits gardens, balconies, beachfronts and rooftops.</p></section>
-<div class="w sec" id="igs" style="display:none"><div class="sh"><h2>Follow us on Instagram</h2><a class="lab" id="igl" href="#" target="_blank" rel="noopener"></a></div><div class="igg" id="igf"></div></div>
-<div class="w sec">${faq()}</div>`},
+
+<section class="split">
+  <div style="--c:url(${IMG.a4})"></div>
+  <div><span class="lab mut">For coastal &amp; rooftop spaces</span>
+    <h2>Designed to sit beside antique stone and modern glass.</h2>
+    <p>From beachfront villas to Airbnb rooftops, we size, colour and cushion every set to your space. Send your terrace dimensions and we will quote.</p>
+    <a class="bk" href="#custom">Book a free consultation</a>
+  </div>
+</section>
+
+<div class="w sec">
+  <div class="stp">
+    <div><h3>1. Choose</h3><p>Pick a model, weave colour and cushion fabric.</p></div>
+    <div><h3>2. Pay</h3><p>Pay by M-Pesa. You get a prompt on your phone.</p></div>
+    <div><h3>3. Confirm</h3><p>We open WhatsApp so our team can arrange delivery with you.</p></div>
+    <div><h3>4. Deliver</h3><p>Delivered and set up at your home or property.</p></div>
+  </div>
+</div>
+
+<div class="w" style="padding-bottom:30px">
+  <div class="lab" style="margin-bottom:22px">Explore Rattan Furniture Kenya</div>
+  ${CATS.map(c=>`<a class="chip lab" href="#cat-${encodeURIComponent(c[0])}">${c[0]}</a>`).join('')}
+  <a class="chip lab" href="#gallery">Gallery</a>
+  <a class="chip lab" href="#custom">Custom orders</a>
+  <a class="chip lab" href="#grass">Artificial grass</a>
+  <a class="chip lab" href="#tuffgrass">Tuff Grass</a>
+  <a class="chip lab" href="#canopyfence">Canopy Fence</a>
+  <a class="chip lab" href="#about">About us</a>
+  <a class="chip lab" href="#contact">Contact</a>
+</div>
+
+<section class="band">
+  <p>We make high-quality outdoor furniture in Kiambu County from synthetic rattan woven.</p>
+  <p>It is sunproof and waterproof, so it suits gardens, balconies, beachfronts and rooftops.</p>
+</section>
+
+<div class="w sec" id="igs" style="display:none">
+  <div class="sh"><h2>Follow us on Instagram</h2><a class="lab" id="igl" href="#" target="_blank" rel="noopener"></a></div>
+  <div class="igg" id="igf"></div>
+</div>
+<div class="w sec">${faq()}</div>
+`},
 delivery:()=>{const Z=S.delivery;return `<div class="w sec" style="max-width:900px"><div class="crumb lab"><a href="#home">Home</a> / Delivery</div><h2 class="pt">Delivery fees</h2><p class="mut" style="margin-bottom:24px">We deliver across Kenya. The delivery fee depends on your location. When you place your order, we open WhatsApp and our team confirms the fee with you and arranges delivery.</p>${Z.length?`<table><tr><th>Location</th><th>Delivery fee</th></tr>${Z.map(z=>`<tr><td>${esc(z.n)}</td><td>${money(z.f)}</td></tr>`).join('')}</table>${S.free?`<p style="margin-top:20px"><b>Free delivery</b> on orders of ${money(S.free)} or more.</p>`:''}`:`<a class="bk" target="_blank" rel="noopener" href="${wa('Hi, how much is delivery to my location?')}">Ask about delivery on WhatsApp</a>`}<p style="margin-top:30px"><a class="lk" href="#shop">Continue shopping →</a></p></div>`},
 tuffgrass:()=>secPage('tuff'),
 canopyfence:()=>secPage('canopy'),
@@ -132,7 +399,7 @@ cart:()=>{const t=cart.reduce((s,i)=>s+P[i.id].p*i.q,0),Z=S.delivery;return `<di
 gallery:()=>`<div class="w sec"><h2 class="pt">Gallery</h2><div class="gal">${['a5','n2','a7','a4','n1','a10','a11','n3','a3','a9','a6','a14','a8','a13','a12','a1','a2'].map(k=>`<img src="${IMG[k]}" alt="Rattan furniture project" loading="lazy">`).join('')}</div></div>`,
 custom:()=>`<div class="w sec"><h2 class="pt">Custom orders &amp; quotes</h2><div class="g2"><div class="bx"><input id="qn" placeholder="Your name"><select id="qs"><option>Beach house</option><option>Rooftop Airbnb</option><option>Hotel or lodge</option><option>Restaurant</option><option>Home garden</option></select><textarea id="qm" rows="5" placeholder="Tell us the space size, items and colours you like"></textarea><button class="bk" style="width:100%" data-quote>Send request on WhatsApp</button></div><div class="bx"><h3>What we can customise</h3><p>Weave colour, frame size, cushion fabric, canopy, glass tops and bulk quantities for property owners.</p></div></div></div>`,
 grass:()=>`<div class="w sec"><h2 class="pt">Artificial grass installation</h2><div class="g2"><div class="bx"><p>Balconies, rooftops, kids’ play areas and gardens. Pile heights: 25 mm, 30 mm, 35 mm and 40 mm, installed by our team.</p><a class="bk" target="_blank" rel="noopener" href="${wa('Hi, I need a quote for artificial grass installation')}">Get a quote on WhatsApp</a></div><img src="${IMG.a8}" alt="Balcony with artificial grass"></div></div>`,
-about:()=>`<div class="w sec"><h2 class="pt">About Rattan Furniture Kenya</h2><div class="g2"><div class="bx"><p>We make high-quality outdoor furniture in Kiambu County from synthetic rattan woven on a strong, rust-proof metal structure. It is sunproof and waterproof, so it suits gardens, balconies, beachfronts and rooftops.</p></div><img src="${IMG.logo}" alt="Rattan Furniture Kenya logo" style="max-width:420px"></div></div>`,
+about:()=>`<div class="w sec"><h2 class="pt">About Rattan Furniture Kenya</h2><div class="g2"><div class="bx"><p>We make high-quality outdoor furniture in Kiambu County from synthetic rattan woven. It is sunproof and waterproof, so it suits gardens, balconies, beachfronts and rooftops.</p></div><img src="${IMG.logo}" alt="Rattan Furniture Kenya logo" style="max-width:420px"></div></div>`,
 contact:()=>`<div class="w sec"><h2 class="pt">Contact us</h2><div class="g2"><div class="bx"><p><b>WhatsApp / phone:</b> ${S.phone}<br><b>Location:</b> Kiambu County, Kenya</p><a class="bk" target="_blank" rel="noopener" href="${wa('Hello, I’d like to enquire about your furniture')}">Chat on WhatsApp</a></div><div class="bx"><h3>Visit us</h3><p>Message us on WhatsApp to arrange a visit.</p></div></div></div>`};
 async function pay(){const m=$('#pm'),bt=$('#pb'),name=$('#cn').value.trim(),ph=$('#cph').value.trim(),loc=$('#cl').value.trim(),zs=$('#cz'),zone=zs&&zs.value!==''?S.delivery[+zs.value].n:'';
 if(!name||!ph||!loc||(zs&&!zone)){m.textContent='Please fill in your name, phone number and delivery address.';return}
@@ -182,7 +449,7 @@ $('#mb').innerHTML=`<div class="crumb lab"><a href="#" data-x>Home</a> / <a href
 <p class="lab" style="margin:26px 0 10px">Weave colour: ${W[sel.w][0]}</p><div>${sw(W,'w',sel.w)}</div><p class="lab" style="margin:22px 0 10px">Cushion colour: ${K[sel.c][0]}</p><div>${sw(K,'c',sel.c)}</div>
 <div class="row" style="justify-content:flex-start;gap:14px;margin:24px 0"><span class="lab">Quantity</span><button class="sb" data-q="-1" aria-label="Fewer">−</button><b>${sel.q}</b><button class="sb" data-q="1" aria-label="More">+</button></div>
 <button class="pill bk" data-madd>Add to cart</button><a class="pill" target="_blank" rel="noopener" href="${wa('Hi, I’d like a custom version of: '+opt())}">Request customisation</a><a class="pill" target="_blank" rel="noopener" href="${wa('Hi, I’d like to order: '+opt())}">Order on WhatsApp</a></div></div>
-<table style="margin-top:50px;max-width:900px"><tr><th>Material</th><td>Synthetic rattan / wicker weave</td></tr><tr><th>Frame</th><td>Strong, rust-proof metal structure</td></tr><tr><th>Weather</th><td>Sunproof and waterproof</td></tr><tr><th>Cushions</th><td>Your choice of colour and fabric</td></tr><tr><th>Best for</th><td>${BF[p.c]||'Terraces, patios and gardens'}</td></tr><tr><th>Made in</th><td>Kiambu County, Kenya</td></tr><tr><th>Delivery</th><td>Across Kenya, confirmed on WhatsApp</td></tr><tr><th>Customising</th><td>Size, weave colour and cushion fabric on request</td></tr><tr><th>Care</th><td>Wipe clean with mild soap and water</td></tr></table>
+<table style="margin-top:50px;max-width:900px"><tr><th>Material</th><td>Synthetic rattan / wicker weave</td></tr><tr><th>Weather</th><td>Sunproof and waterproof</td></tr><tr><th>Cushions</th><td>Your choice of colour and fabric</td></tr><tr><th>Best for</th><td>${BF[p.c]||'Terraces, patios and gardens'}</td></tr><tr><th>Made in</th><td>Kiambu County, Kenya</td></tr><tr><th>Delivery</th><td>Across Kenya, confirmed on WhatsApp</td></tr><tr><th>Customising</th><td>Size, weave colour and cushion fabric on request</td></tr><tr><th>Care</th><td>Wipe clean with mild soap and water</td></tr></table>
 ${rel.length?`<h2 style="margin:60px 0 26px;font-size:36px">More in ${p.c}</h2>${pgrid(rel)}`:''}`}
 function navTo(id){const mb=$('#mb');if(!mb)return;mb.style.opacity=0;setTimeout(()=>{cur=id;track('product',P[id].n);sel={w:0,c:0,q:1};mr();$('#md').scrollTop=0;mb.style.opacity=''},180)}
 function step(d){const L=P.filter(x=>x.c===P[cur].c);if(L.length<2)return;const i=L.findIndex(x=>x.id===cur);navTo(L[(i+d+L.length)%L.length].id)}
